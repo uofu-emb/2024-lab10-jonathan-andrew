@@ -43,8 +43,12 @@ https://github.com/raspberrypi/pico-extras
 
 Hint: Consult the schematics and datasheets you read in the prelab.
 
+We can connect 3.3-5.5V to VBUS or VSYS (VSYS preferred).
+
 ## Activity
 1. Determine what the default values for the `WAKE_EN`, `SLEEP_EN`, and `ENABLE` registers are.
+
+All bits in `WAKE_EN` and `SLEEP_EN` that are not reserved reset to 1, and non-reserved bits in the `ENABLE` registers reset to 0.
 
 ## Activity
 
