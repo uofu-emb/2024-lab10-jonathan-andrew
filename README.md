@@ -85,7 +85,7 @@ If you want a serial connection, you need to use the UART pins rather than USB a
     ```
 while(1) {
  uint32_t k;
- for (int i = 0; i < 30) {
+ for (int i = 0; i < 30; i++) {
     uint32_t j = 0;
     j = ((~j >> i) + 1) * 27644437;
     k = j;

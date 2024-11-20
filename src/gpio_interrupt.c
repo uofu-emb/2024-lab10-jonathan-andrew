@@ -21,7 +21,7 @@ int main(void)
     gpio_pull_down(IN_PIN);
     gpio_init(OUT_PIN);
     gpio_set_dir(OUT_PIN, GPIO_OUT);
-    gpio_put(OUT_PIN, toggle);
+    gpio_put(OUT_PIN, false);
 
     gpio_set_irq_enabled_with_callback(IN_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL , true, irq_callback);
     while(1) __wfi();
