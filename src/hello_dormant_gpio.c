@@ -8,7 +8,7 @@
 #include "pico/stdlib.h"
 #include "pico/sleep.h"
 
-#define WAKE_GPIO 10
+#define WAKE_GPIO IN_PIN
 
 int main() {
     stdio_init_all();
