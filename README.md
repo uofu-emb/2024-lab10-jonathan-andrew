@@ -103,6 +103,20 @@ while(1) {
 1. Run the dormant demo. https://github.com/raspberrypi/pico-playground/tree/master/sleep/hello_dormant/hello_dormant_gpio.c
     1. More details are in section 2.11.5.2 of the RP2040 datasheet.
 
+## Table of Measurements
+
+A 1 kohm current-limiting resistor was used with the LED driven by GPIO where applicable.
+
+| Scenario                  | Source File          | Current        | Power         |
+| LED w/ sleep_ms           | sleep.c              | ~29 mA         | ~96 mW        |
+| LED w/ vTaskDelay         | task_delay.c         | ~33 mA         | ~109 mW       |
+| LED w/ interrupt @   1kHz | gpio_interrupt.c     | ~29 mA         | ~96 mW        |
+| LED w/ interrupt @ 100kHz | gpio_interrupt.c     | ~30 mA         | ~99 mW        |
+| LED w/ interrupt @ 500kHz | gpio_interrupt.c     | ~33 mA         | ~109 mW       |
+| Busy loop                 | loop.c               | ~32 mA         | ~106 mW       |
+| Sleep demo                | hello_sleep_alarm.c  | ~28 mA/~3.5 mA | ~92 mW/~12 mW |
+| Dormant demo              | hello_dormant_gpio.c | ~28 mA/~2.5 mA | ~92 mW/~8 mW  |
+
 ## Reference
 
 There is no specific reference implementation, you will be using code similar to previous labs or examples provided by Raspberry Pi.
