@@ -46,7 +46,7 @@ set(PICO_BOARD pico_w CACHE STRING "Board type")
 # This imports the Pico SDK (must be included before the project)
 include(${PICO_SDK_PATH}/pico_sdk_init.cmake)
 
-add_subdirectory(${PICO_EXTRAS_PATH})
+add_subdirectory(${PICO_EXTRAS_PATH} lib/pico-extras)
 
 # This imports the library configuration for FreeRTOS
 include(${FREERTOS_PATH}/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake)
