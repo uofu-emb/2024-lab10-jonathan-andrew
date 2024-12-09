@@ -8,6 +8,7 @@ env:
   FREERTOS_PATH: /usr/local/share/pico/FreeRTOS-Kernel
   UNITY_PATH: /usr/local/share/pico/Unity
   PICO_TOOLCHAIN_PATH: /usr/bin
+  PICO_EXTRAS_PATH: /usr/local/share/pico/pico-extras
 
 jobs:
   build:
