@@ -15,6 +15,12 @@ else()
     set(PICO_SDK_PATH lib/pico-sdk)
 endif()
 
+if(DEFINED ENV{PICO_EXTRAS_PATH})
+    set(PICO_EXTRAS_PATH $ENV{PICO_EXTRAS_PATH})
+else()
+    set(PICO_EXTRAS_PATH ${CMAKE_CURRENT_LIST_DIR}/lib/pico-extras)
+endif()
+
 if(DEFINED ENV{FREERTOS_PATH})
     set(FREERTOS_PATH $ENV{FREERTOS_PATH})
 else()
@@ -39,6 +45,8 @@ set(PICO_BOARD pico_w CACHE STRING "Board type")
 
 # This imports the Pico SDK (must be included before the project)
 include(${PICO_SDK_PATH}/pico_sdk_init.cmake)
+
+add_subdirectory(${PICO_EXTRAS_PATH})
 
 # This imports the library configuration for FreeRTOS
 include(${FREERTOS_PATH}/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake)
