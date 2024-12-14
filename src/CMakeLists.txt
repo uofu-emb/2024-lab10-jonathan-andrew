@@ -16,14 +16,6 @@ pico_add_extra_outputs(task_delay)
 add_custom_target(flash_delay picotool load -f $<TARGET_FILE:task_delay> DEPENDS task_delay)
 
 
-add_executable(timer timer.c)
-pico_enable_stdio_uart(timer 0)
-pico_enable_stdio_usb(timer 1)
-target_link_libraries(timer PRIVATE pico_stdlib)
-pico_add_extra_outputs(timer)
-add_custom_target(flash_timer picotool load -f $<TARGET_FILE:timer> DEPENDS timer)
-
-
 add_executable(sleep sleep.c)
 pico_enable_stdio_uart(sleep 0)
 pico_enable_stdio_usb(sleep 1)
@@ -39,9 +31,26 @@ target_link_libraries(irq PRIVATE pico_stdlib)
 pico_add_extra_outputs(irq)
 add_custom_target(flash_irq picotool load -f $<TARGET_FILE:irq> DEPENDS irq)
 
-add_executable(rtc rtc.c)
-pico_enable_stdio_uart(rtc 0)
-pico_enable_stdio_usb(rtc 1)
-target_link_libraries(rtc PRIVATE pico_stdlib hardware_rtc pico_cyw43_arch_none)
-pico_add_extra_outputs(rtc)
-add_custom_target(flash_rtc picotool load -f $<TARGET_FILE:rtc> DEPENDS rtc)
+
+add_executable(loop loop.c)
+pico_enable_stdio_uart(loop 0)
+pico_enable_stdio_usb(loop 1)
+target_link_libraries(loop PRIVATE pico_stdlib)
+pico_add_extra_outputs(loop)
+add_custom_target(flash_loop picotool load -f $<TARGET_FILE:loop> DEPENDS loop)
+
+
+add_executable(sleep_alarm hello_sleep_alarm.c)
+pico_enable_stdio_uart(sleep_alarm 0)
+pico_enable_stdio_usb(sleep_alarm 1)
+target_link_libraries(sleep_alarm PRIVATE pico_stdlib hardware_sleep)
+pico_add_extra_outputs(sleep_alarm)
+add_custom_target(flash_sleep_alarm picotool load -f $<TARGET_FILE:sleep_alarm> DEPENDS sleep_alarm)
+
+
+add_executable(dormant hello_dormant_gpio.c)
+pico_enable_stdio_uart(dormant 0)
+pico_enable_stdio_usb(dormant 1)
+target_link_libraries(dormant PRIVATE pico_stdlib hardware_sleep)
+pico_add_extra_outputs(dormant)
+add_custom_target(flash_dormant picotool load -f $<TARGET_FILE:dormant> DEPENDS dormant)

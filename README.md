@@ -43,8 +43,12 @@ https://github.com/raspberrypi/pico-extras
 
 Hint: Consult the schematics and datasheets you read in the prelab.
 
+We can connect 3.3-5.5V to VBUS or VSYS (VSYS preferred).
+
 ## Activity
 1. Determine what the default values for the `WAKE_EN`, `SLEEP_EN`, and `ENABLE` registers are.
+
+All bits in `WAKE_EN` and `SLEEP_EN` that are not reserved reset to 1, and non-reserved bits in the `ENABLE` registers reset to 0.
 
 ## Activity
 
@@ -81,7 +85,7 @@ If you want a serial connection, you need to use the UART pins rather than USB a
     ```
 while(1) {
  uint32_t k;
- for (int i = 0; i < 30) {
+ for (int i = 0; i < 30; i++) {
     uint32_t j = 0;
     j = ((~j >> i) + 1) * 27644437;
     k = j;
@@ -98,6 +102,20 @@ while(1) {
     1. https://github.com/raspberrypi/pico-extras/blob/master/src/rp2_common/pico_sleep/sleep.c
 1. Run the dormant demo. https://github.com/raspberrypi/pico-playground/tree/master/sleep/hello_dormant/hello_dormant_gpio.c
     1. More details are in section 2.11.5.2 of the RP2040 datasheet.
+
+## Table of Measurements
+
+A 1 kohm current-limiting resistor was used with the LED driven by GPIO where applicable.
+
+| Scenario                  | Source File          | Current        | Power         |
+| LED w/ sleep_ms           | sleep.c              | ~29 mA         | ~96 mW        |
+| LED w/ vTaskDelay         | task_delay.c         | ~33 mA         | ~109 mW       |
+| LED w/ interrupt @   1kHz | gpio_interrupt.c     | ~29 mA         | ~96 mW        |
+| LED w/ interrupt @ 100kHz | gpio_interrupt.c     | ~30 mA         | ~99 mW        |
+| LED w/ interrupt @ 500kHz | gpio_interrupt.c     | ~33 mA         | ~109 mW       |
+| Busy loop                 | loop.c               | ~32 mA         | ~106 mW       |
+| Sleep demo                | hello_sleep_alarm.c  | ~28 mA/~3.5 mA | ~92 mW/~12 mW |
+| Dormant demo              | hello_dormant_gpio.c | ~28 mA/~2.5 mA | ~92 mW/~8 mW  |
 
 ## Reference
 
